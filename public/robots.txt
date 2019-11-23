@@ -1,0 +1,9 @@
+User-agent: Googlebot
+Disallow: /nogooglebot/
+
+User-agent: *
+Allow: /https://wulperstudio.com
+Allow: /https://wulperstudio.com/blog
+
+
+Sitemap: http://example.com/sitemap.xml
