@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_CONTACT } from '../../../qraphql/querys/constact';
-
+import Swal from 'sweetalert2';
 //Img 
 import imgform from '../../../static/img/form/imgM1.png';
 import iconform1 from '../../../static/img/form/iconM1.svg';
@@ -15,23 +15,39 @@ import {
     InputContainer,
     ButtonContainer
 } from './styled';
+import { async } from 'q';
 
 
-function handleSubmit(e, phone, email, web, addTodo) {
+async function handleSubmit(e, phone, email, web, addTodo) {
     e.preventDefault();
-    addTodo({ 
-        variables: {
-            input: {
-            data: {
-                name: phone,
-                email: email,
-                message: web,
+    try {
+        await addTodo({ 
+            variables: {
+                input: {
+                data: {
+                    name: phone,
+                    email: email,
+                    message: web,
+                }
+                }
             }
-            }
-        }
-    });
-    console.log("reset", e.target);
-    e.target.reset();
+        });
+        e.target.reset();
+        Swal.fire({
+            icon: 'success',
+            title: 'Message sent succesfully',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'an error occurred'
+          })
+    }
+    
 }
 
 function    Form() {
