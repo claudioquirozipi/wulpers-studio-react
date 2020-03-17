@@ -1,12 +1,10 @@
 import gql from "graphql-tag";
 
 export const CREATE_CONTACT = gql`
-  mutation CreateContactUs($input: createContactInput!) {
+  mutation CreateContact($input: createContactInput) {
     createContact(input: $input) {
       contact {
-        name
-        email
-        message
+        id
       }
     }
   }

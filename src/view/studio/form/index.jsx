@@ -16,7 +16,16 @@ import {
   ButtonContainer
 } from "./styled";
 
-async function handleSubmit(e, phone, email, web, addTodo) {
+async function handleSubmit(
+  e,
+  phone,
+  email,
+  web,
+  addTodo,
+  setPhone,
+  setEmail,
+  setWeb
+) {
   e.preventDefault();
   try {
     await addTodo({
@@ -30,7 +39,9 @@ async function handleSubmit(e, phone, email, web, addTodo) {
         }
       }
     });
-    e.target.reset();
+    setPhone("");
+    setEmail("");
+    setWeb("");
     Swal.fire({
       icon: "success",
       title: "Message sent succesfully",
@@ -38,6 +49,7 @@ async function handleSubmit(e, phone, email, web, addTodo) {
       timer: 1500
     });
   } catch (error) {
+    console.log("error", error);
     Swal.fire({
       icon: "error",
       title: "Oops...",
@@ -67,7 +79,20 @@ function Form() {
         <h2>Let's make it happen</h2>
       </Header>
       <FormContainer>
-        <form onSubmit={e => handleSubmit(e, phone, email, web, addTodo)}>
+        <form
+          onSubmit={e =>
+            handleSubmit(
+              e,
+              phone,
+              email,
+              web,
+              addTodo,
+              setPhone,
+              setEmail,
+              setWeb
+            )
+          }
+        >
           <img src={imgform} alt="Form" />
           <InputContainer>
             <img src={iconform1} alt="" />
