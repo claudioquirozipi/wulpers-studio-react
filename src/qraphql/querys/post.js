@@ -10,17 +10,16 @@ export const EXCHANGE_RATES = gql`
       image {
         url
       }
-      tags
       createdAt
       updatedAt
     }
   }
 `;
 
-export const FIND_ID_POST = (id) =>
+export const FIND_URL_POST = url =>
   gql`
     {
-      post(id: "${id}") {
+      postByUrl(url: "${url}") {
         id
         title
         description
@@ -28,7 +27,6 @@ export const FIND_ID_POST = (id) =>
         image {
           url
         }
-        tags
         createdAt
         updatedAt
       }

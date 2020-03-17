@@ -13,20 +13,20 @@ const createApolloClient = (cache = {}) =>
   });
 
 export default Component => {
-  const Wrapper = (props) => {
+  const Wrapper = props => {
     console.log("wrapper", props);
     let cache = undefined;
     if (typeof window !== "undefined") {
-      cache = (window).cache;
+      cache = window.cache;
     }
     const apolloClient = createApolloClient(cache);
     cache = apolloClient.cache.extract();
     if (cache && typeof window !== "undefined") {
-      (window).cache = cache;
+      window.cache = cache;
     }
     return (
       <ApolloProvider client={apolloClient}>
-        <Component props={props}/>
+        <Component props={props} />
       </ApolloProvider>
     );
   };
